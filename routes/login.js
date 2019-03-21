@@ -62,7 +62,8 @@ app.post('/google', async(req, res) => {
                 res.status(200).json({
                     ok: true,
                     usuario: usuarioDB,
-                    id: usuarioDB._id
+                    id: usuarioDB._id,
+                    token: token
                 });
             }
         } else { // el usuario no existe hay que crearlo
@@ -71,6 +72,7 @@ app.post('/google', async(req, res) => {
             usuario.email = googleUser.email;
             usuario.img = googleUser.img;
             usuario.password = ':)';
+            usuario.google = true;
             usuario.save((err, usuarioDB) => {
                 if (err) {
                     return res.status(500).json({
@@ -85,7 +87,8 @@ app.post('/google', async(req, res) => {
                 res.status(200).json({
                     ok: true,
                     usuario: usuarioDB,
-                    id: usuarioDB._id
+                    id: usuarioDB._id,
+                    token: token
                 });
 
             });
